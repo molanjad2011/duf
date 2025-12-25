@@ -1,149 +1,173 @@
 # duf
 
-[![Latest Release](https://img.shields.io/github/release/muesli/duf.svg?style=for-the-badge)](https://github.com/muesli/duf/releases)
-[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=for-the-badge)](https://pkg.go.dev/github.com/muesli/duf)
-[![Software License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](/LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/muesli/duf/build.yml?style=for-the-badge&branch=master)](https://github.com/muesli/duf/actions)
-[![Go ReportCard](https://goreportcard.com/badge/github.com/muesli/duf?style=for-the-badge)](https://goreportcard.com/report/muesli/duf)
-
-Disk Usage/Free Utility (Linux, BSD, macOS & Windows)
+ابزار Disk Usage/Free (لینوکس، BSD، macOS و ویندوز)
 
 ![duf](/duf.png)
 
-## Features
+## ویژگی‌ها
 
-- [x] User-friendly, colorful output
-- [x] Adjusts to your terminal's theme & width
-- [x] Sort the results according to your needs
-- [x] Groups & filters devices
-- [x] Can conveniently output JSON
+* [x] خروجی کاربرپسند و رنگی
+* [x] تطبیق با تم و عرض ترمینال شما
+* [x] مرتب‌سازی نتایج بر اساس نیاز شما
+* [x] گروه‌بندی و فیلتر کردن دستگاه‌ها
+* [x] امکان خروجی راحت به فرمت JSON
 
-## Installation
+## نصب
 
-### Packages
+### بسته‌ها
 
-#### Linux
-- Arch Linux: `pacman -S duf`
-- Ubuntu (22.04 and later) / Debian (12 and later): `apt install duf`
-- Fedora Linux: `dnf install duf`
-- Nix: `nix-env -iA nixpkgs.duf`
-- Void Linux: `xbps-install -S duf`
-- Gentoo Linux: `emerge sys-fs/duf`
-- Solus: `eopkg it duf`
-- [Packages](https://github.com/muesli/duf/releases) in Alpine, Debian & RPM formats
+#### لینوکس
+
+* Arch Linux: `pacman -S duf`
+* Ubuntu (22.04 و بالاتر) / Debian (12 و بالاتر): `apt install duf`
+* Fedora Linux: `dnf install duf`
+* Nix: `nix-env -iA nixpkgs.duf`
+* Void Linux: `xbps-install -S duf`
+* Gentoo Linux: `emerge sys-fs/duf`
+* Solus: `eopkg it duf`
+* [بسته‌ها](https://github.com/muesli/duf/releases) برای Alpine، Debian و فرمت RPM
 
 #### BSD
-- FreeBSD: `pkg install duf`
-- OpenBSD: `pkg_add duf`
+
+* FreeBSD: `pkg install duf`
+* OpenBSD: `pkg_add duf`
 
 #### macOS
-- with [Homebrew](https://brew.sh/): `brew install duf`
-- with [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install duf`
 
-#### Windows
-- with [Chocolatey](https://chocolatey.org/): `choco install duf`
-- with [scoop](https://scoop.sh/): `scoop install duf`
+* با [Homebrew](https://brew.sh/): `brew install duf`
+* با [MacPorts](https://www.macports.org): `sudo port selfupdate && sudo port install duf`
 
-#### Android
-- Android (via termux): `pkg install duf`
+#### ویندوز
 
-### Binaries
-- [Binaries](https://github.com/muesli/duf/releases) for Linux, FreeBSD, OpenBSD, macOS, Windows
+* با [Chocolatey](https://chocolatey.org/): `choco install duf`
+* با [scoop](https://scoop.sh/): `scoop install duf`
 
-### From source
+#### اندروید
 
-Make sure you have a working Go environment (Go 1.23 or higher is required).
-See the [install instructions](https://golang.org/doc/install.html).
+* اندروید (از طریق termux): `pkg install duf`
 
-Compiling duf is easy, simply run:
+### باینری‌ها
 
-    git clone https://github.com/muesli/duf.git
-    cd duf
-    go build
+* [باینری‌ها](https://github.com/muesli/duf/releases) برای لینوکس، FreeBSD، OpenBSD، macOS و ویندوز
 
-## Usage
+### از سورس
 
-You can simply start duf without any command-line arguments:
+مطمئن شوید که محیط Go شما آماده است (نیازمند Go 1.23 یا بالاتر).
+دستورالعمل نصب [اینجا](https://golang.org/doc/install.html) موجود است.
 
-    duf
+ساخت duf ساده است:
 
-If you supply arguments, duf will only list specific devices & mount points:
+```bash
+git clone https://github.com/muesli/duf.git
+cd duf
+go build
+```
 
-    duf /home /some/file
+## استفاده
 
-If you want to list everything (including pseudo, duplicate, inaccessible file systems):
+می‌توانید بدون آرگومان duf را اجرا کنید:
 
-    duf --all
+```bash
+duf
+```
 
-### Filtering
+برای لیست کردن دستگاه‌ها و نقاط مانت مشخص:
 
-You can show and hide specific tables:
+```bash
+duf /home /some/file
+```
 
-    duf --only local,network,fuse,special,loops,binds
-    duf --hide local,network,fuse,special,loops,binds
+برای نمایش همه موارد (شامل سیستم‌فایل‌های شبه، تکراری و غیرقابل دسترسی):
 
-You can also show and hide specific filesystems:
+```bash
+duf --all
+```
 
-    duf --only-fs tmpfs,vfat
-    duf --hide-fs tmpfs,vfat
+### فیلتر کردن
 
-...or specific mount points:
+نمایش یا مخفی کردن جدول‌های خاص:
 
-    duf --only-mp /,/home,/dev
-    duf --hide-mp /,/home,/dev
+```bash
+duf --only local,network,fuse,special,loops,binds
+duf --hide local,network,fuse,special,loops,binds
+```
 
-Wildcards inside quotes work:
+نمایش یا مخفی کردن سیستم‌فایل‌ها:
 
-    duf --only-mp '/sys/*,/dev/*'
+```bash
+duf --only-fs tmpfs,vfat
+duf --hide-fs tmpfs,vfat
+```
 
-### Display options
+یا نقاط مانت مشخص:
 
-Sort the output:
+```bash
+duf --only-mp /,/home,/dev
+duf --hide-mp /,/home,/dev
+```
 
-    duf --sort size
+از wildcard درون کوتیشن‌ها نیز می‌توان استفاده کرد:
 
-Valid keys are: `mountpoint`, `size`, `used`, `avail`, `usage`, `inodes`,
-`inodes_used`, `inodes_avail`, `inodes_usage`, `type`, `filesystem`.
+```bash
+duf --only-mp '/sys/*,/dev/*'
+```
 
-Show or hide specific columns:
+### گزینه‌های نمایش
 
-    duf --output mountpoint,size,usage
+مرتب‌سازی خروجی:
 
-Valid keys are: `mountpoint`, `size`, `used`, `avail`, `usage`, `inodes`,
-`inodes_used`, `inodes_avail`, `inodes_usage`, `type`, `filesystem`.
+```bash
+duf --sort size
+```
 
-List inode information instead of block usage:
+کلیدهای معتبر: `mountpoint`, `size`, `used`, `avail`, `usage`, `inodes`, `inodes_used`, `inodes_avail`, `inodes_usage`, `type`, `filesystem`.
 
-    duf --inodes
+نمایش یا مخفی کردن ستون‌های خاص:
 
-If duf doesn't detect your terminal's colors correctly, you can set a theme:
+```bash
+duf --output mountpoint,size,usage
+```
 
-    duf --theme light
+اطلاعات inode به جای بلاک‌ها:
 
-### Color-coding & Thresholds
+```bash
+duf --inodes
+```
 
-duf highlights the availability & usage columns in red, green, or yellow,
-depending on how much space is still available. You can set your own thresholds:
+اگر رنگ ترمینال به درستی شناسایی نشد، می‌توانید تم تنظیم کنید:
 
-    duf --avail-threshold="10G,1G"
-    duf --usage-threshold="0.5,0.9"
+```bash
+duf --theme light
+```
 
-### Bonus
+### رنگ‌بندی و آستانه‌ها
 
-If you prefer your output as JSON:
+duf ستون‌های availability و usage را با رنگ‌های قرمز، سبز یا زرد بسته به میزان فضای موجود نمایش می‌دهد. می‌توانید آستانه‌های خود را تنظیم کنید:
 
-    duf --json
+```bash
+duf --avail-threshold="10G,1G"
+duf --usage-threshold="0.5,0.9"
+```
 
-## Troubleshooting
+### خروجی JSON
 
-Users of `oh-my-zsh` should be aware that it already defines an alias called
-`duf`, which you will have to remove in order to use `duf`:
+اگر خروجی JSON می‌خواهید:
 
-    unalias duf
+```bash
+duf --json
+```
 
-## Feedback
+## عیب‌یابی
 
-Got some feedback or suggestions? Please open an issue or drop me a note!
+کاربران `oh-my-zsh` باید بدانند که این ابزار از قبل یک alias با نام `duf` تعریف کرده است، که باید حذف شود:
+
+```bash
+unalias duf
+```
+
+## بازخورد
+
+اگر بازخورد یا پیشنهادی دارید، لطفاً یک issue باز کنید یا پیام دهید!
 
 * [Twitter](https://twitter.com/mueslix)
-* [The Fediverse](https://mastodon.social/@fribbledom)
+* [Fediverse](https://mastodon.social/@fribbledom)
